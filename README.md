@@ -1,98 +1,83 @@
-# Dynamic Pricing for Ride-Sharing Services
+# 🚖 **Dynamic Pricing Model for Ride-Sharing**  
 
-## Overview
+## 📌 **Project Overview**
+This project implements a **dynamic pricing model** for ride-sharing platforms using **Python** and **machine learning**. The model predicts ride costs based on **demand and supply fluctuations** using **Random Forest Regression**.
 
-This project implements a dynamic pricing strategy for ride-sharing services based on supply and demand conditions. It utilizes machine learning techniques to predict ride costs, considering factors such as the number of riders, number of drivers, vehicle type, and expected ride duration.
+---
 
-## Features
+## 📊 **Dataset**
+The dataset (`dynamic_pricing.csv`) contains ride details, including:
+- `Number_of_Riders` - The number of passengers requesting a ride.
+- `Number_of_Drivers` - The available drivers in the area.
+- `Vehicle_Type` - Type of vehicle (Economy or Premium).
+- `Expected_Ride_Duration` - Estimated ride duration in minutes.
+- `Historical_Cost_of_Ride` - Past ride cost.
 
-- Exploratory Data Analysis (EDA) using Seaborn and Matplotlib
-- Data preprocessing including encoding categorical variables, handling outliers, and scaling features
-- Implementation of dynamic pricing based on demand-supply multipliers
-- Machine learning model (Random Forest Regressor) for price prediction
-- Performance evaluation through visualization and comparison of actual vs. predicted values
+---
 
-## Dataset
+## 💡 **Pricing Strategy**
+The pricing model follows these key steps:
+1. **Demand Multiplier**: Adjusts ride costs based on rider demand.
+2. **Supply Multiplier**: Modifies pricing based on driver availability.
+3. **Final Cost Calculation**:
+   - If **demand is high & supply is low**, prices increase 📈
+   - If **demand is low & supply is high**, prices decrease 📉
 
-The dataset used (`dynamic_pricing.csv`) contains the following features:
+---
 
-- `Number_of_Riders`: Total number of passengers requesting rides
-- `Number_of_Drivers`: Total number of available drivers
-- `Vehicle_Type`: Type of vehicle (Premium or Economy)
-- `Expected_Ride_Duration`: Estimated duration of the ride (in minutes)
-- `Historical_Cost_of_Ride`: Previous ride cost
+## ⚙️ **Installation**
+To run this project locally, follow these steps:
 
-## Dynamic Pricing Strategy
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/dynamic-pricing-model.git
 
-The project adjusts ride costs based on demand and supply conditions:
+# Navigate to the project directory
+cd dynamic-pricing-model
 
-1. **Demand Multiplier**: If the number of riders is above the 75th percentile, the value is divided by the 75th percentile. If below, it is divided by the 25th percentile.
-2. **Supply Multiplier**: If the number of drivers is above the 25th percentile, the adjustment factor is computed as (75th percentile / number of drivers). Otherwise, (25th percentile / number of drivers) is used.
-3. **Adjusted Ride Cost**: Calculated by multiplying the historical ride cost with demand and supply multipliers.
-
-## Model Training
-
-The dataset is split into training and testing sets (80/20). A Random Forest Regressor is trained using the following input features:
-
-- `Number_of_Riders`
-- `Number_of_Drivers`
-- `Vehicle_Type` (encoded as 1 for Premium, 0 for Economy)
-- `Expected_Ride_Duration`
-
-The target variable is `adjusted_ride_cost`.
-
-## Prediction Function
-
-The model can predict ride costs using the function:
-
-```python
-predict_price(number_of_riders, number_of_drivers, vehicle_type, Expected_Ride_Duration)
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-Example usage:
+---
 
+## 🚀 **Usage**
+### 1️⃣ **Run the Model**
+```bash
+python dynamic_pricing.py
+```
+### 2️⃣ **Predict Ride Cost**
+You can use the model to predict ride costs:
 ```python
+from dynamic_pricing import predict_price
+
 predicted_price = predict_price(50, 25, "Economy", 30)
-print("Predicted Price:", predicted_price)
+print(f"Predicted Ride Cost: ${predicted_price[0]:.2f}")
 ```
+---
 
-## Visualizations
+## 📈 **Model Performance**
+The model's accuracy is assessed by comparing **actual vs predicted values** using visualization techniques:
+- **Regression plots** to evaluate prediction trends.
+- **Heatmaps** to analyze feature correlations.
+- **Boxplots** to examine cost distributions.
 
-- **Regression Plot**: Relationship between ride duration and ride cost
-- **Box Plot**: Distribution of historical ride costs by vehicle type
-- **Correlation Matrix**: Heatmap of feature correlations
-- **Pie Chart**: Distribution of profitable vs. loss rides
-- **Actual vs. Predicted Values**: Regression plot comparing model predictions
+---
 
-## Installation & Usage
+## 🤝 **Contributing**
+We welcome contributions! 🚀 To contribute:
+1. **Fork** this repository 🍴
+2. **Create** a new branch `feature-branch` 🌿
+3. **Commit** changes 💾
+4. **Push** to GitHub 🚀
+5. **Submit** a pull request 🔥
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/dynamic-pricing-ride-sharing.git
-   ```
-2. Install dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
-3. Run the script:
-   ```sh
-   python dynamic_pricing.py
-   ```
+---
 
-## Dependencies
+## 📜 **License**
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
-- Python 3.x
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
+---
 
-## License
-
-This project is licensed under the MIT License.
-
-## Author
-
-[Your Name]
+💡 _Built with passion for AI and Machine Learning ❤️_
 
